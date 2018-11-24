@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -18,7 +17,20 @@ public class CORSChecker {
 		  
 		  try
 		  {
-			  
+			System.out.print(System.lineSeparator() + "#########################################################################" + System.lineSeparator());
+			System.out.print("#    _____ ____  _____   _____    _____ _               _               #" + System.lineSeparator());
+			System.out.print("#   / ____/ __ \\|  __ \\ / ____|  / ____| |             | |              #" + System.lineSeparator());
+			System.out.print("#  | |   | |  | | |__) | (___   | |    | |__   ___  ___| | _____ _ __   #" + System.lineSeparator());
+			System.out.print("#  | |   | |  | |  _  / \\___ \\  | |    | '_ \\ / _ \\/ __| |/ / _ \\ '__|  #" + System.lineSeparator());
+			System.out.print("#  | |___| |__| | | \\ \\ ____) | | |____| | | |  __/ (__|   <  __/ |     #" + System.lineSeparator());
+			System.out.print("#   \\_____\\____/|_|  \\_\\_____/   \\_____|_| |_|\\___|\\___|_|\\_\\___|_|     #" + System.lineSeparator());
+			System.out.print("#                                                                       #" + System.lineSeparator());
+			System.out.print("#  By: Milad Khoshdel                  Blog: https://blog.regux.com     #" + System.lineSeparator());
+			System.out.print("#  Email: Miladkhoshdel@gmail.com                                       #" + System.lineSeparator());
+			System.out.print("#                                                                       #" + System.lineSeparator());
+			System.out.print("#########################################################################" + System.lineSeparator() + System.lineSeparator());
+
+			                                                                 
 			Pattern p = Pattern.compile("(http|https):\\/\\/[A-Za-z\\.-]*\\.[a-zA-Z]{2,10}.*");			  
 			System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
 			String domainname;
@@ -113,8 +125,6 @@ public class CORSChecker {
 		  catch (Exception e)
 		  {
 			  System.out.print(System.lineSeparator() + " [-] Some Error Happened.");
-	      }
-		  
+	      }  
 	  }
-
 }
