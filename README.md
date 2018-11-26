@@ -1,4 +1,4 @@
-# Corschecker
+## Corschecker
 
 java script that send a URL as value of Origin in request header and check the value of Access-Control-Allow-Origin in the response header.
 
