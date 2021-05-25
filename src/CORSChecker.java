@@ -150,7 +150,12 @@ public class CORSChecker {
 				}
 				else
 				{
-					System.out.println(" [-] Not Vulnerable");
+					if (isAccessableOrigin) {
+						System.out.println(" [-] Warning!      --->     Not Vulnerable");
+					} else {
+						System.out.println(" [-] Not Vulnerable");
+
+					}
 				}
 
 				if (conn.getHeaderField("Access-Control-Allow-Credentials") != null)
@@ -167,7 +172,11 @@ public class CORSChecker {
 			}
 			else
 			{
-				System.out.println(" [-] There is no Access-Control-Allow-Origin Header.");
+				if (isAccessableOrigin) {
+					System.out.println(" [-] Warning!      --->    There is no Access-Control-Allow-Origin Header.");
+				} else {
+					System.out.println(" [-] There is no Access-Control-Allow-Origin Header.");
+				}
 			}
 		} catch (UnknownHostException exception)
 		{
