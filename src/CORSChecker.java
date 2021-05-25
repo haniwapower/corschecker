@@ -88,6 +88,7 @@ public class CORSChecker {
 			}
 		} catch (Exception e)
 		{
+			e.printStackTrace();
 			System.out.print(System.lineSeparator() + " [-] Some Error Happened.");
 		}
 
@@ -186,6 +187,7 @@ public class CORSChecker {
 							+ " [-] Error: Host is Invalid. Please Check your URL and make sure that you are connected to the internet.");
 		} catch (Exception e)
 		{
+			e.printStackTrace();
 			System.out.print(System.lineSeparator() + " [-] Some Error Happened.");
 		}
 	}
