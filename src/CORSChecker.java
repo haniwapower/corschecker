@@ -64,7 +64,8 @@ public class CORSChecker {
 			{
 
 				System.out.print(url.toString() + " is invalid. Please Enter a Valid URL (Exapmle: https://foo.bar): ");
-				domainname = sc.next();
+				inputLines = sc.nextLine().split(" ");
+				domainname = inputLines[0];
 				if (domainname.contains("http")) {
 					url = new URL(domainname);
 				} else {
