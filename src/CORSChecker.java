@@ -3,11 +3,21 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.X509Certificate;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 public class CORSChecker {
 
@@ -73,7 +83,8 @@ public class CORSChecker {
 				}
 				m = p.matcher(url.toString());
 			}
-
+			//SSL証明書の検証で全て無視する設定に
+			initDefaultHostnameVerifier();
 			System.out.println("");
 			System.out.println("");
 			System.out.print("***** Request from origin that cannot access the resource ***** ");
@@ -91,7 +102,40 @@ public class CORSChecker {
 			e.printStackTrace();
 			System.out.print(System.lineSeparator() + " [-] Some Error Happened.");
 		}
+	}
 
+	public static void initDefaultHostnameVerifier() throws KeyManagementException, NoSuchAlgorithmException {
+		// Create a trust manager that does not validate certificate chains
+		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+
+			@Override
+			public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+				return null;
+			}
+
+			@Override
+			public void checkClientTrusted(X509Certificate[] certs, String authType) {
+			}
+
+			@Override
+			public void checkServerTrusted(X509Certificate[] certs, String authType) {
+			}
+		} };
+
+		// Install the all-trusting trust manager
+		SSLContext sc = SSLContext.getInstance("SSL");
+		sc.init(null, trustAllCerts, new java.security.SecureRandom());
+		HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+
+		// Create all-trusting host name verifier
+		HostnameVerifier allHostsValid = new HostnameVerifier() {
+			@Override
+			public boolean verify(String hostname, SSLSession session) {
+				return true;
+			}
+		};
+		System.out.println("initDefaultHostnameVerifier allHostsValid");
+		HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
 	}
 
 	public void sendRequest(URL url, String origin, boolean isAccessableOrigin) {
